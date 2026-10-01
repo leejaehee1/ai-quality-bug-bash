@@ -1,0 +1,117 @@
+name: 버그 리포트
+description: 화면이나 결과가 요구사항과 다른 곳을 보고합니다
+title: "[팀이름] "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        **누가 읽어도 같은 결함을 다시 볼 수 있게** 작성합니다. 본 것(사실)과 짐작(추측)을 나눠 적습니다.
+        개인 정보(이름, 연락처)는 적지 마세요.
+
+  - type: input
+    id: summary
+    attributes:
+      label: 요약
+      description: 무엇이, 어떤 조건에서, 어떻게 잘못되는지 한 문장으로
+      placeholder: "만 18세를 입력하면 지원 대상으로 판정함"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: where
+    attributes:
+      label: 어디서 발견했나요
+      options:
+        - "화면 ① 판정 결과 (대상)"
+        - "화면 ② 판정 결과 (비대상)"
+        - "화면 ③ 정보 입력 오류"
+        - "화면 ④ 운영 대시보드"
+        - "실습 노트북 (테스트 케이스 표, 손 계산 비교 등)"
+        - "기타"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: category
+    attributes:
+      label: 결함 종류
+      options:
+        - "기능: 판정·계산 결과가 틀림"
+        - "데이터·지표: 숫자가 틀리거나 서로 맞지 않음"
+        - "신뢰성·투명성: AI 안내, 근거, 이의 제기 수단 부족"
+        - "사용성: 사용자가 이해하기 어려운 표시·메시지"
+        - "품질 기준: 품질 게이트·기준값이 잘못 설정됨"
+    validations:
+      required: true
+
+  - type: input
+    id: requirement
+    attributes:
+      label: 관련 요구사항 ID
+      description: requirements.md의 ID. 여러 개면 쉼표로
+      placeholder: "R-01"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: severity
+    attributes:
+      label: 심각도 (결함이 주는 영향)
+      options:
+        - "치명: 잘못된 결정·금전 손실·법적 문제로 이어짐"
+        - "높음: 핵심 기능이 틀린 결과를 냄"
+        - "보통: 일부 조건에서 틀리거나 오해를 부름"
+        - "낮음: 표현·형식 문제"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: priority
+    attributes:
+      label: 우선순위 (얼마나 빨리 고쳐야 하나)
+      options:
+        - "P1: 즉시 (배포 중단)"
+        - "P2: 이번 배포 전"
+        - "P3: 다음 배포"
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: 재현 절차
+      description: 번호를 붙여 차례대로. 입력값을 정확히 적습니다.
+      placeholder: |
+        1. 나이 18, 거주 기간 12개월, 미취업 입력
+        2. 판정하기 누름
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: 기대 결과 (명세에 따르면)
+      placeholder: "지원 대상이 아님 (R-01: 만 19세 이상 34세 이하)"
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: 실제 결과
+      placeholder: "지원 대상입니다 🎉 라고 표시됨"
+    validations:
+      required: true
+
+  - type: textarea
+    id: evidence
+    attributes:
+      label: 화면 캡처·근거
+      description: 이미지를 이 칸에 끌어다 놓으면 첨부됩니다. 노트북에서 찾았다면 결과표(❌ 행)를 캡처합니다.
+
+  - type: textarea
+    id: impact
+    attributes:
+      label: 사용자·사업에 미치는 영향 (PM 관점)
+      placeholder: "대상이 아닌 사람에게 지원금이 지급되어 예산 손실, 나중에 환수하면 민원 발생"
